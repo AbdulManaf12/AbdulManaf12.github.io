@@ -807,6 +807,10 @@ main {
   line-height: 1.6;
 }
 
+.time-period-display{
+  color: gray;
+}
+
 .timeline-item:not(:last-child)::before {
   content: "";
   position: absolute;
