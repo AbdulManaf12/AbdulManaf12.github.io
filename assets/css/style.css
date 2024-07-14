@@ -336,6 +336,9 @@ main {
   border-radius: 20px;
 }
 
+.dp-image{
+  border-radius: 20px;
+}
 .info-content .name {
   color: var(--white-2);
   font-size: var(--fs-3);
