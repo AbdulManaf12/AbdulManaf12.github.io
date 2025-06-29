@@ -388,6 +388,188 @@
             </ul>
           </section>
 
+          <!-- GitHub Activity -->
+          <section class="github-activity">
+            <h3 class="h3 service-title">GitHub Activity</h3>
+
+            <div
+              class="github-commits-container"
+              style="
+                width: 100%;
+                padding: 1.5rem;
+                border: 1px solid var(--jet);
+                border-radius: 12px;
+                background: linear-gradient(135deg, #24292e 0%, #0d1117 100%);
+                color: white;
+                margin-bottom: 2rem;
+              "
+            >
+              <div
+                style="display: flex; align-items: center; margin-bottom: 1rem"
+              >
+                <div
+                  style="
+                    width: 40px;
+                    height: 40px;
+                    background: #21262d;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 1rem;
+                  "
+                >
+                  <span style="font-size: 1.2rem">🐙</span>
+                </div>
+                <div>
+                  <h4 style="margin: 0; font-size: 1.2rem; color: #f0f6fc">
+                    GitHub Contributions
+                  </h4>
+                  <p style="margin: 0; opacity: 0.7; font-size: 0.9rem">
+                    @AbdulManaf12
+                  </p>
+                </div>
+              </div>
+
+              <!-- GitHub Contribution Graph -->
+              <div
+                style="
+                  background: #0d1117;
+                  border-radius: 8px;
+                  padding: 1rem;
+                  border: 1px solid #30363d;
+                  margin-bottom: 1rem;
+                  overflow-x: auto;
+                "
+              >
+                <img
+                  src="https://ghchart.rshah.org/409ba5/AbdulManaf12"
+                  alt="Abdul Manaf's GitHub Contribution Graph"
+                  style="
+                    width: 100%;
+                    max-width: 100%;
+                    border-radius: 4px;
+                    display: block;
+                  "
+                />
+              </div>
+
+              <!-- GitHub Stats in a row -->
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 1rem;
+                  margin-bottom: 1rem;
+                "
+              >
+                <div
+                  style="
+                    background: #0d1117;
+                    border-radius: 8px;
+                    padding: 1rem;
+                    border: 1px solid #30363d;
+                  "
+                >
+                  <img
+                    src="https://github-readme-stats.vercel.app/api?username=AbdulManaf12&show_icons=true&theme=dark&hide_border=true&bg_color=0d1117&text_color=c9d1d9&icon_color=58a6ff&title_color=58a6ff&count_private=true"
+                    alt="Abdul Manaf's GitHub Stats"
+                    style="width: 100%; max-width: 100%; border-radius: 8px"
+                  />
+                </div>
+
+                <div
+                  style="
+                    background: #0d1117;
+                    border-radius: 8px;
+                    padding: 1rem;
+                    border: 1px solid #30363d;
+                  "
+                >
+                  <img
+                    src="https://github-readme-streak-stats.herokuapp.com/?user=AbdulManaf12&theme=dark&hide_border=true&background=0d1117&stroke=30363d&ring=58a6ff&fire=58a6ff&currStreakLabel=c9d1d9"
+                    alt="Abdul Manaf's GitHub Streak"
+                    style="width: 100%; max-width: 100%; border-radius: 8px"
+                  />
+                </div>
+              </div>
+
+              <!-- Most Used Languages -->
+              <div
+                style="
+                  background: #0d1117;
+                  border-radius: 8px;
+                  padding: 1rem;
+                  border: 1px solid #30363d;
+                  margin-bottom: 1rem;
+                "
+              >
+                <img
+                  src="https://github-readme-stats.vercel.app/api/top-langs/?username=AbdulManaf12&layout=compact&theme=dark&hide_border=true&bg_color=0d1117&text_color=c9d1d9&title_color=58a6ff"
+                  alt="Abdul Manaf's Most Used Languages"
+                  style="width: 100%; max-width: 100%; border-radius: 8px"
+                />
+              </div>
+
+              <div style="text-align: center; margin-top: 1rem">
+                <a
+                  href="https://github.com/AbdulManaf12"
+                  target="_blank"
+                  style="
+                    color: #58a6ff;
+                    text-decoration: none;
+                    font-weight: 500;
+                    font-size: 0.95rem;
+                    border: 1px solid #30363d;
+                    padding: 0.5rem 1rem;
+                    border-radius: 6px;
+                    display: inline-block;
+                    transition: all 0.3s ease;
+                  "
+                  onmouseover="this.style.backgroundColor='#21262d'; this.style.borderColor='#58a6ff';"
+                  onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='#30363d';"
+                >
+                  View Full Profile on GitHub →
+                </a>
+              </div>
+            </div>
+
+            <!-- Responsive design for mobile -->
+            <style>
+              @media (max-width: 768px) {
+                .github-commits-container div[style*="grid-template-columns"] {
+                  grid-template-columns: 1fr !important;
+                }
+              }
+
+              /* Dark mode compatibility */
+              @media (prefers-color-scheme: light) {
+                .github-commits-container {
+                  background: linear-gradient(
+                    135deg,
+                    #f6f8fa 0%,
+                    #ffffff 100%
+                  ) !important;
+                  color: #24292f !important;
+                  border-color: #d0d7de !important;
+                }
+                .github-commits-container h4 {
+                  color: #24292f !important;
+                }
+                .github-commits-container div[style*="background: #0d1117"] {
+                  background: #f6f8fa !important;
+                  border-color: #d0d7de !important;
+                }
+                .github-commits-container div[style*="background: #21262d"] {
+                  background: #e1e4e8 !important;
+                }
+                .github-commits-container img[src*="theme=dark"] {
+                  content: url("https://github-readme-stats.vercel.app/api?username=AbdulManaf12&show_icons=true&theme=default&hide_border=true&count_private=true") !important;
+                }
+              }
+            </style>
+          </section>
+
           <!--- comments/reviews/feedback -->
 
           <!-- <section class="testimonials">
