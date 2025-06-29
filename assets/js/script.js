@@ -203,6 +203,12 @@ function currentSlide(index) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  // Initialize dynamic dates first
+  updateDynamicDates();
+
+  // Update dates every hour to keep "Present" positions current
+  setInterval(updateDynamicDates, 3600000); // 1 hour = 3600000 ms
+
   // Select all navigation links and page elements
   const navigationLinks = document.querySelectorAll("[data-nav-link]");
   const pages = document.querySelectorAll("[data-page]");
@@ -277,3 +283,144 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// Dynamic Date Calculation Functions
+function calculateTimePeriod(startDate, endDate) {
+  const start = new Date(startDate);
+  const end = endDate === "current" ? new Date() : new Date(endDate);
+
+  let years = end.getFullYear() - start.getFullYear();
+  let months = end.getMonth() - start.getMonth();
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  // Handle ongoing positions
+  const isOngoing = endDate === "current";
+
+  // Format the time period
+  let timePeriod = "";
+  if (years > 0 && months > 0) {
+    timePeriod = `${years} yr${years > 1 ? "s" : ""} ${months} mo${
+      months > 1 ? "s" : ""
+    }`;
+  } else if (years > 0) {
+    timePeriod = `${years} yr${years > 1 ? "s" : ""}`;
+  } else if (months > 0) {
+    timePeriod = `${months} mo${months > 1 ? "s" : ""}`;
+  } else {
+    timePeriod = "Less than 1 mo";
+  }
+
+  return { timePeriod, isOngoing };
+}
+
+function formatDateRange(startDate, endDate) {
+  const start = new Date(startDate);
+  const end = endDate === "current" ? new Date() : new Date(endDate);
+  const isOngoing = endDate === "current";
+
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const startMonth = months[start.getMonth()];
+  const startYear = start.getFullYear();
+
+  if (isOngoing) {
+    return `${startMonth} ${startYear} - Present`;
+  } else {
+    const endMonth = months[end.getMonth()];
+    const endYear = end.getFullYear();
+    return `${startMonth} ${startYear} - ${endMonth} ${endYear}`;
+  }
+}
+
+function updateDynamicDates() {
+  const dynamicDateElements = document.querySelectorAll(".dynamic-date");
+
+  dynamicDateElements.forEach((element) => {
+    const startDate = element.getAttribute("data-start-date");
+    const endDate = element.getAttribute("data-end-date");
+
+    if (startDate && endDate) {
+      const { timePeriod, isOngoing } = calculateTimePeriod(startDate, endDate);
+      const dateRange = formatDateRange(startDate, endDate);
+
+      // Extract the original text to preserve the degree/position info
+      const originalText = element.textContent.trim();
+
+      // Find the position where the date range should start
+      // Look for patterns like "MS(CS)", "BS(CS)", etc.
+      let beforeDate = "";
+      if (originalText.includes("MS(CS)")) {
+        beforeDate = "MS(CS)";
+      } else if (originalText.includes("BS(CS)")) {
+        beforeDate = "BS(CS)";
+      } else if (originalText.includes("FSc(Pre-Engineering)")) {
+        beforeDate = "FSc(Pre-Engineering)";
+      } else if (originalText.includes("Matriculation(Science)")) {
+        beforeDate = "Matriculation(Science)";
+      } else {
+        // For experience entries, just use the date range
+        beforeDate = "";
+      }
+
+      // Create new content with dynamic dates
+      if (beforeDate) {
+        element.innerHTML = `${beforeDate} ${dateRange}`;
+      } else {
+        element.innerHTML = `${dateRange}
+          <i class="time-period-display"> · ${timePeriod}</i>`;
+      }
+    }
+  });
+
+  // Update MS program progress
+  updateMSProgress();
+}
+
+function updateMSProgress() {
+  const msProgressElement = document.getElementById("ms-progress");
+  if (msProgressElement) {
+    const startDate = new Date("2024-01-01"); // MS program start
+    const currentDate = new Date();
+
+    // Calculate months since start
+    const monthsSinceStart =
+      (currentDate.getFullYear() - startDate.getFullYear()) * 12 +
+      (currentDate.getMonth() - startDate.getMonth());
+
+    // MS programs are typically 4 semesters (2 years)
+    // Each semester is about 6 months (including breaks)
+    const currentSemester = Math.min(Math.ceil(monthsSinceStart / 6), 4);
+
+    let progressText = "";
+    if (currentSemester <= 1) {
+      progressText = "Currently in my 1st semester of the MS program.";
+    } else if (currentSemester === 2) {
+      progressText = "Completed 1st semester, currently in 2nd semester.";
+    } else if (currentSemester === 3) {
+      progressText = "Completed 2 semesters, currently in 3rd semester.";
+    } else if (currentSemester === 4) {
+      progressText = "Completed 3 semesters, currently in final semester.";
+    } else {
+      progressText = "Successfully completed the MS program.";
+    }
+
+    msProgressElement.textContent = progressText;
+  }
+}
