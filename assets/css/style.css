@@ -106,6 +106,56 @@
   --transition-2: 0.5s ease-in-out;
 }
 
+/* Light mode variables */
+[data-theme="light"] {
+  --bg-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 100%) 3%,
+    hsl(0, 0%, 98%) 97%
+  );
+  --bg-gradient-jet: linear-gradient(
+      to bottom right,
+      hsla(0, 0%, 95%, 0.8) 0%,
+      hsla(0, 0%, 90%, 0) 100%
+    ),
+    hsl(0, 0%, 100%);
+  --bg-gradient-yellow-1: linear-gradient(
+    to bottom right,
+    hsl(45, 100%, 71%) 0%,
+    hsla(36, 100%, 69%, 0) 50%
+  );
+  --bg-gradient-yellow-2: linear-gradient(
+      135deg,
+      hsla(45, 100%, 71%, 0.251) 0%,
+      hsla(35, 100%, 68%, 0) 59.86%
+    ),
+    hsl(0, 0%, 100%);
+  --border-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 85%) 0%,
+    hsla(0, 0%, 85%, 0) 50%
+  );
+
+  --jet: hsl(0, 0%, 90%);
+  --onyx: hsl(0, 0%, 95%);
+  --eerie-black-1: hsl(0, 0%, 98%);
+  --eerie-black-2: hsl(0, 0%, 100%);
+  --smoky-black: hsl(0, 0%, 100%);
+  --white-1: hsl(0, 0%, 15%);
+  --white-2: hsl(0, 0%, 25%);
+  --orange-yellow-crayola: hsl(220, 70%, 50%);
+  --vegas-gold: hsl(220, 60%, 45%);
+  --light-gray: hsl(0, 0%, 45%);
+  --light-gray-70: hsla(0, 0%, 45%, 0.7);
+  --bittersweet-shimmer: hsl(220, 43%, 51%);
+
+  --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.08);
+  --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.08);
+  --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.1);
+  --shadow-4: 0 25px 50px hsla(0, 0%, 0%, 0.05);
+  --shadow-5: 0 24px 80px hsla(0, 0%, 0%, 0.08);
+}
+
 /*-----------------------------------*\
   #RESET
 \*-----------------------------------*/
@@ -162,10 +212,12 @@ textarea {
 
 html {
   font-family: var(--ff-poppins);
+  transition: var(--transition-2);
 }
 
 body {
   background: var(--smoky-black);
+  transition: var(--transition-2);
 }
 
 /*-----------------------------------*\
@@ -1337,6 +1389,196 @@ textarea.form-input::-webkit-resizer {
 }
 
 /*-----------------------------------*\
+  #THEME TOGGLE
+\*-----------------------------------*/
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--border-gradient-onyx);
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: var(--shadow-2);
+  transition: var(--transition-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--eerie-black-1);
+  border-radius: inherit;
+  z-index: -1;
+  transition: var(--transition-1);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-3);
+}
+
+.theme-toggle ion-icon {
+  font-size: 20px;
+  color: var(--orange-yellow-crayola);
+  transition: var(--transition-1);
+}
+
+.theme-toggle .light-icon {
+  display: block;
+}
+
+.theme-toggle .dark-icon {
+  display: none;
+}
+
+[data-theme="light"] .theme-toggle .light-icon {
+  display: none;
+}
+
+[data-theme="light"] .theme-toggle .dark-icon {
+  display: block;
+}
+
+[data-theme="light"] .theme-toggle {
+  background: var(--border-gradient-onyx);
+  box-shadow: var(--shadow-2);
+}
+
+[data-theme="light"] .theme-toggle::before {
+  background: var(--eerie-black-2);
+}
+
+[data-theme="light"] .theme-toggle ion-icon {
+  color: var(--orange-yellow-crayola);
+}
+
+/*-----------------------------------*\
+  #SMOOTH TRANSITIONS FOR THEME SWITCHING
+\*-----------------------------------*/
+
+/* Add smooth transitions to all elements that change colors */
+.sidebar,
+article,
+.navbar,
+.icon-box,
+.social-link,
+.navbar-link,
+.contact-link,
+.form-btn,
+.filter-select,
+.select-list,
+.select-item button,
+.article-title::after,
+.skill-progress-fill,
+.timeline-item::after {
+  transition: all var(--transition-2);
+}
+
+/*-----------------------------------*\
+  #LIGHT MODE SPECIFIC OVERRIDES
+\*-----------------------------------*/
+
+/* Navbar specific styling for light mode */
+[data-theme="light"] .navbar {
+  background: hsla(0, 0%, 100%, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid hsl(0, 0%, 90%);
+}
+
+[data-theme="light"] .navbar-link {
+  color: hsl(0, 0%, 45%);
+}
+
+[data-theme="light"] .navbar-link:hover,
+[data-theme="light"] .navbar-link:focus {
+  color: hsl(0, 0%, 25%);
+}
+
+[data-theme="light"] .navbar-link.active {
+  color: hsl(220, 70%, 50%);
+}
+
+/* Icon and accent colors for light mode */
+[data-theme="light"] .icon-box {
+  color: hsl(220, 70%, 50%);
+}
+
+[data-theme="light"] .social-item .social-link {
+  color: hsl(0, 0%, 60%);
+}
+
+[data-theme="light"] .social-item .social-link:hover {
+  color: hsl(220, 70%, 50%);
+}
+
+/* Text gradient override for light mode */
+[data-theme="light"] .article-title::after {
+  background: linear-gradient(to right, hsl(220, 70%, 50%), hsl(220, 60%, 45%));
+}
+
+[data-theme="light"] .skill-progress-fill {
+  background: linear-gradient(to right, hsl(220, 70%, 50%), hsl(220, 60%, 45%));
+}
+
+[data-theme="light"] .timeline-item::after {
+  background: linear-gradient(to right, hsl(220, 70%, 50%), hsl(220, 60%, 45%));
+}
+
+/* Form and button styling for light mode */
+[data-theme="light"] .form-btn {
+  background: var(--border-gradient-onyx);
+  color: hsl(220, 70%, 50%);
+}
+
+[data-theme="light"] .form-btn:hover {
+  background: linear-gradient(to right, hsl(220, 70%, 50%), hsl(220, 60%, 45%));
+  color: hsl(0, 0%, 100%);
+}
+
+/* Filter buttons for light mode */
+[data-theme="light"] .filter-select {
+  background: hsl(0, 0%, 100%);
+  color: hsl(0, 0%, 45%);
+  border: 1px solid hsl(0, 0%, 90%);
+}
+
+[data-theme="light"] .select-list {
+  background: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 90%);
+}
+
+[data-theme="light"] .select-item button {
+  background: hsl(0, 0%, 100%);
+  color: hsl(0, 0%, 45%);
+}
+
+[data-theme="light"] .select-item button:hover {
+  background: hsl(0, 0%, 95%);
+}
+
+/* Contact info styling for light mode */
+[data-theme="light"] .contact-title {
+  color: hsl(0, 0%, 60%);
+}
+
+[data-theme="light"] .contact-link,
+[data-theme="light"] .contact-info time,
+[data-theme="light"] .contact-info address {
+  color: hsl(0, 0%, 35%);
+}
+
+[data-theme="light"] .contact-link:hover {
+  color: hsl(220, 70%, 50%);
+}
+
+/*-----------------------------------*\
   #RESPONSIVE
 \*-----------------------------------*/
 
@@ -2037,5 +2279,33 @@ textarea.form-input::-webkit-resizer {
 
   .timeline-text {
     max-width: 700px;
+  }
+}
+
+/*-----------------------------------*\
+  #RESPONSIVE THEME TOGGLE
+\*-----------------------------------*/
+
+@media (max-width: 768px) {
+  .theme-toggle {
+    top: 15px;
+    right: 15px;
+    padding: 10px;
+  }
+
+  .theme-toggle ion-icon {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 450px) {
+  .theme-toggle {
+    top: 10px;
+    right: 10px;
+    padding: 8px;
+  }
+
+  .theme-toggle ion-icon {
+    font-size: 16px;
   }
 }
