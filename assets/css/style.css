@@ -1169,6 +1169,121 @@ main {
   font-weight: var(--fw-300);
 }
 
+/* Live Demo Styles */
+.project-container {
+  width: 100%;
+}
+
+.project-img.live-demo {
+  position: relative;
+  height: 200px;
+  background: var(--eerie-black-2);
+  border: 1px solid var(--jet);
+  overflow: hidden;
+}
+
+.demo-iframe {
+  width: 333.33%;
+  height: 333.33%;
+  border: none;
+  border-radius: 16px;
+  transition: var(--transition-1);
+  transform: scale(0.3);
+  transform-origin: top left;
+  pointer-events: none;
+}
+
+.demo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition-1);
+  z-index: 2;
+}
+
+.project-img.live-demo:hover .demo-overlay {
+  opacity: 1;
+}
+
+.demo-actions {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.demo-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: var(--fw-500);
+  font-size: var(--fs-6);
+  transition: var(--transition-1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.live-demo-btn {
+  background: var(--orange-yellow-crayola);
+  color: var(--eerie-black-1);
+  border: 2px solid var(--orange-yellow-crayola);
+}
+
+.live-demo-btn:hover {
+  background: transparent;
+  color: var(--orange-yellow-crayola);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(255, 187, 84, 0.3);
+}
+
+.github-btn {
+  background: transparent;
+  color: var(--white-2);
+  border: 2px solid var(--jet);
+}
+
+.github-btn:hover {
+  background: var(--jet);
+  color: var(--orange-yellow-crayola);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustments for demo */
+@media (max-width: 768px) {
+  .project-img.live-demo {
+    height: 200px;
+  }
+
+  .demo-iframe {
+    width: 400%;
+    height: 400%;
+    transform: scale(0.25);
+  }
+
+  .demo-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .demo-btn {
+    padding: 10px 20px;
+    font-size: var(--fs-7);
+    min-width: 100px;
+  }
+}
+
 /*-----------------------------------*\
   #BLOG
 \*-----------------------------------*/
