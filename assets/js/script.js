@@ -135,6 +135,73 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
+// Achievement Image Slider Functionality - Global variables and functions
+let currentSlideIndex = 1;
+let slideInterval;
+
+// Auto slide functionality
+function startSlideShow() {
+  // Clear any existing interval first
+  clearInterval(slideInterval);
+  slideInterval = setInterval(() => {
+    currentSlideIndex++;
+    if (currentSlideIndex > 4) {
+      currentSlideIndex = 1;
+    }
+    showSlide(currentSlideIndex);
+  }, 5000); // Change slide every 5 seconds
+}
+
+// Stop auto slide
+function stopSlideShow() {
+  clearInterval(slideInterval);
+}
+
+// Show specific slide
+function showSlide(index) {
+  const slides = document.querySelectorAll(".slide");
+  const indicators = document.querySelectorAll(".indicator");
+
+  if (!slides.length) return; // Exit if no slides found
+
+  // Hide all slides
+  slides.forEach((slide) => slide.classList.remove("active"));
+  indicators.forEach((indicator) => indicator.classList.remove("active"));
+
+  // Show current slide
+  const currentSlide = document.querySelector(`[data-slide="${index}"]`);
+  const currentIndicator = document.querySelector(
+    `.indicator[data-slide="${index}"]`
+  );
+
+  if (currentSlide) currentSlide.classList.add("active");
+  if (currentIndicator) currentIndicator.classList.add("active");
+
+  currentSlideIndex = index;
+}
+
+// Change slide (next/previous) - Global function for onclick
+function changeSlide(direction) {
+  stopSlideShow();
+  currentSlideIndex += direction;
+
+  if (currentSlideIndex > 4) {
+    currentSlideIndex = 1;
+  } else if (currentSlideIndex < 1) {
+    currentSlideIndex = 4;
+  }
+
+  showSlide(currentSlideIndex);
+  startSlideShow();
+}
+
+// Go to specific slide - Global function for onclick
+function currentSlide(index) {
+  stopSlideShow();
+  showSlide(index);
+  startSlideShow();
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   // Select all navigation links and page elements
   const navigationLinks = document.querySelectorAll("[data-nav-link]");
@@ -168,8 +235,45 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
+      // Initialize slider if switching to achievement page
+      if (pageId === "achievement") {
+        setTimeout(() => {
+          const slides = document.querySelectorAll(".slide");
+          if (slides.length > 0) {
+            currentSlideIndex = 1;
+            showSlide(1);
+            startSlideShow();
+          }
+        }, 100);
+      } else {
+        // Stop slideshow when leaving achievement page
+        stopSlideShow();
+      }
+
       // Scroll to top of the page
       window.scrollTo(0, 0);
     });
   });
+
+  // Initialize slider on page load if achievement is active
+  const achievementPage = document.querySelector(".achievement.active");
+  if (achievementPage) {
+    setTimeout(() => {
+      showSlide(1);
+      startSlideShow();
+    }, 100);
+  }
+
+  // Add mouse hover events to pause/resume slideshow
+  const sliderContainer = document.querySelector(".post-image-slider");
+  if (sliderContainer) {
+    sliderContainer.addEventListener("mouseenter", stopSlideShow);
+    sliderContainer.addEventListener("mouseleave", () => {
+      // Only restart if we're on the achievement page
+      const achievementActive = document.querySelector(".achievement.active");
+      if (achievementActive) {
+        startSlideShow();
+      }
+    });
+  }
 });
