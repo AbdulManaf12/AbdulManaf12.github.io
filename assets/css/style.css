@@ -2095,6 +2095,14 @@ article,
     box-shadow: none;
   }
 
+  /**
+   * ARTICLE
+   */
+
+  article {
+    padding-top: 80px; /* Add top padding to prevent navbar overlap */
+  }
+
   .navbar-list {
     gap: 30px;
     padding: 0 20px;
