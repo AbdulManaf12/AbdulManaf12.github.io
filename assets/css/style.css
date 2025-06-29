@@ -2309,3 +2309,68 @@ article,
     font-size: 16px;
   }
 }
+
+/*-----------------------------------*\
+  #CV SECTION
+\*-----------------------------------*/
+
+/* PDF Viewer Styles */
+.pdf-viewer-section {
+  margin-top: 20px;
+}
+
+.pdf-viewer-container {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  min-height: 600px;
+  background: var(--eerie-black-2);
+  border: 1px solid var(--jet);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-2);
+}
+
+.pdf-viewer {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 14px;
+}
+
+.pdf-viewer-container p {
+  color: var(--light-gray);
+  text-align: center;
+  padding: 40px 20px;
+  font-size: var(--fs-6);
+}
+
+.pdf-viewer-container a {
+  color: var(--orange-yellow-crayola);
+  text-decoration: none;
+}
+
+.pdf-viewer-container a:hover {
+  text-decoration: underline;
+}
+
+/* Light mode styling for CV section */
+[data-theme="light"] .pdf-viewer-container {
+  background: var(--eerie-black-2);
+  border: 1px solid var(--jet);
+}
+
+/* Responsive design for CV section */
+@media (max-width: 768px) {
+  .pdf-viewer-container {
+    height: 70vh;
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 450px) {
+  .pdf-viewer-container {
+    height: 60vh;
+    min-height: 400px;
+  }
+}
